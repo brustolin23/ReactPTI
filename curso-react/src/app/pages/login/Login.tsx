@@ -28,7 +28,7 @@ export const Login = () =>{
                 <p>Quantidade de caracteres de email é {emailLength}</p>
                 <label>
                     <span>Email</span>
-                    <input value={email} onChange={e => setEmail(e.target.value)} ref={inputEmailRef} onKeyDown={e => e.key=="Enter" ? inputPasswordRef.current?.focus() : undefined}/>
+                    <input value={email} onChange={e => setEmail(e.target.value)} ref={inputEmailRef} onKeyDown={e => e.key === "Enter" ? inputPasswordRef.current?.focus() : undefined}/>
                 </label>
                 <label>
                     <span>Senha</span>
