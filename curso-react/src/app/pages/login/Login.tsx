@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export const Login = () =>{
     //estados para armazenar os inputs
@@ -8,9 +8,10 @@ export const Login = () =>{
     useEffect(() =>{
         console.log("Olá mundo");
     },[]);
-    const handleEntrar = () =>{
+    const handleEntrar = useCallback(() =>{
         console.log("Entrou");
-    }
+        console.log(email);
+    },[email]);
 
     const emailLength = useMemo(() =>{
         return email.length;
