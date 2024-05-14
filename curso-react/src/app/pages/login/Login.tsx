@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export const Login = () =>{
     //estados para armazenar os inputs
@@ -12,9 +12,14 @@ export const Login = () =>{
         console.log("Entrou");
     }
 
+    const emailLength = useMemo(() =>{
+        return email.length;
+    }, [email.length]);
+
     return (
         <div>
             <form>
+                <p>Quantidade de caracteres de email é {emailLength}</p>
                 <label>
                     <span>Email</span>
                     <input value={email} onChange={e => setEmail(e.target.value)}/>
