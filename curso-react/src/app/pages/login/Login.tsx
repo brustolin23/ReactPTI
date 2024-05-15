@@ -28,7 +28,7 @@ export const Login = () =>{
             <form>
                 <p>Quantidade de caracteres de email é {emailLength}</p>
                 <InputLogin type="Text" label="Email" value={email} onChange={e => setEmail(e)} onPressEnter={() => inputPasswordRef.current?.focus()}></InputLogin>
-                <InputLogin type="password" label="Senha" value={password} onChange={e => setPassword(e)} onPressEnter={() => null}></InputLogin>
+                <InputLogin ref={inputPasswordRef} type="password" label="Senha" value={password} onChange={e => setPassword(e)} onPressEnter={() => null}></InputLogin>
                 <button type="button" onClick={handleEntrar}>Entrar</button>
             </form>
         </div>
