@@ -38,6 +38,26 @@ export const Lista = () =>{
         }
     },[])
 
+    const handleOnChange = useCallback((id: string) =>{
+        const tarefaUpdate = lista.find((tarefa)=>tarefa.id === id);
+        if (tarefaUpdate===undefined) return;
+        TarefasService.updateById(id, {
+            ...tarefaUpdate,
+            isCompleted: !tarefaUpdate.isCompleted
+        }).then((result)=>{
+            if (result instanceof ErrorException) {
+                alert(result.message);
+            } else {
+                setLista(oldLista => {
+                    return oldLista.map(oldListItem =>{
+                        if (oldListItem.id===id) return result
+                        return oldListItem
+                    });
+                })
+            }
+        })
+    },[lista])
+
     return (
         <div>
             <p>Lista</p>
@@ -45,18 +65,21 @@ export const Lista = () =>{
             <p>{lista.filter((listItem) => listItem.isCompleted).length}</p>
             <ul>
                 {lista.map((ListItem)=> {return <li key={ListItem.id}>
-                    <input type="checkbox" 
+                    <input type="checkbox"
+                    checked={ListItem.isCompleted}
                     onChange={()=>{
+                        handleOnChange(ListItem.id);
+                    }} 
+                    /*onChange={()=>{
                         setLista(oldLista => {
                             return oldLista.map(oldListItem =>{
                                 const newIsSelected = oldListItem.title === ListItem.title? !oldListItem.isCompleted:oldListItem.isCompleted
                                 return {
-                                    ...oldListItem,
-                                    isCompleted: newIsSelected
+                                    TarefasService.updateById(oldListItem.id,[...oldListItem, newIsSelected]),
                                 };
                             });
                         })
-                    }}>
+                    }}*/>
                     </input>
                     {ListItem.title}
                     </li>})}

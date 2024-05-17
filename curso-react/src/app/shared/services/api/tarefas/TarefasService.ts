@@ -31,7 +31,7 @@ const create = async (dataToCreate: Omit<ITarefa, 'id'>): Promise<ITarefa | Erro
         return new ErrorException(error.message || 'Erro ao criar dados')
     }
 };
-const updateById = async (id:number, dataToUpdate:ITarefa): Promise<ITarefa | ErrorException> => {
+const updateById = async (id:string, dataToUpdate:ITarefa): Promise<ITarefa | ErrorException> => {
     try {
         const { data } = await Api().put(`/tarefas/${id}`, dataToUpdate);
         return data;

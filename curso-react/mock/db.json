@@ -3,32 +3,32 @@
     {
       "id": "1",
       "title": "Mu",
-      "isComplete": false
+      "isCompleted": true
     },
     {
       "id": "2",
       "title": "Aldebaran",
-      "isComplete": false
+      "isCompleted": true
     },
     {
       "id": "3",
       "title": "Saga",
-      "isComplete": false
+      "isCompleted": false
     },
     {
       "id": "4",
       "title": "Máscara da morte",
-      "isComplete": false
+      "isCompleted": false
     },
     {
       "id": "e8f2",
       "title": "Aioria",
-      "isCompleted": false
+      "isCompleted": true
     },
     {
       "id": "bd65",
       "title": "Shaka",
-      "isCompleted": false
+      "isCompleted": true
     }
   ]
 }
