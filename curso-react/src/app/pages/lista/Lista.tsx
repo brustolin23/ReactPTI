@@ -1,17 +1,23 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { ITarefa, TarefasService } from "../../shared/services/api/tarefas/TarefasService";
+import { ErrorException } from "../../shared/services/api/ErrorException";
 
 
-
-interface IListItem{
-    id:number;
-    title:string;
-    isCompleted:boolean;
-}
 
 
 
 export const Lista = () =>{
-    const [lista, setLista] = useState<IListItem[]>([]);
+    const [lista, setLista] = useState<ITarefa[]>([]);
+
+    useEffect(()=>{
+        TarefasService.getAll().then((result)=>{
+            if (result instanceof ErrorException) {
+                alert(result.message);
+            } else {
+                setLista(result);
+            }
+        });
+    },[]);
 
     const handleInputKeyDown :React.KeyboardEventHandler<HTMLInputElement> = useCallback((e) =>{
         if (e.key==='Enter'){
