@@ -3,8 +3,9 @@ import { useCallback, useState } from "react";
 
 
 interface IListItem{
+    id:number;
     title:string;
-    isSelected:boolean;
+    isCompleted:boolean;
 }
 
 
@@ -19,8 +20,9 @@ export const Lista = () =>{
             e.currentTarget.value = '';
             setLista((oldLista)=>{
                 return [...oldLista,{
+                    id: oldLista.length,
                     title: value,
-                    isSelected:false
+                    isCompleted:false
                 }];
             })
         }
@@ -30,14 +32,14 @@ export const Lista = () =>{
         <div>
             <p>Lista</p>
             <input onKeyDown={handleInputKeyDown}></input>
-            <p>{lista.filter((listItem) => listItem.isSelected).length}</p>
+            <p>{lista.filter((listItem) => listItem.isCompleted).length}</p>
             <ul>
-                {lista.map((ListItem)=> {return <li key={ListItem.title}>
+                {lista.map((ListItem)=> {return <li key={ListItem.id}>
                     <input type="checkbox" 
                     onChange={()=>{
                         setLista(oldLista => {
                             return oldLista.map(oldListItem =>{
-                                const newIsSelected = oldListItem.title === ListItem.title? !oldListItem.isSelected:oldListItem.isSelected
+                                const newIsSelected = oldListItem.title === ListItem.title? !oldListItem.isCompleted:oldListItem.isCompleted
                                 return {
                                     ...oldListItem,
                                     isSelected: newIsSelected
