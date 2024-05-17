@@ -39,9 +39,9 @@ const updateById = async (id:string, dataToUpdate:ITarefa): Promise<ITarefa | Er
         return new ErrorException(error.message || 'Erro ao atualizar dados')
     }
 };
-const deleteById = async (id:number): Promise<undefined | ErrorException> => {
+const deleteById = async (id:string): Promise<undefined | ErrorException> => {
     try {
-        await Api().get(`/tarefas/${id}`);
+        await Api().delete(`/tarefas/${id}`);
         return undefined;
     } catch (error: any) {
         return new ErrorException(error.message || 'Erro ao deletar dados')

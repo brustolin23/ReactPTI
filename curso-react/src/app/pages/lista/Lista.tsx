@@ -58,6 +58,17 @@ export const Lista = () =>{
         })
     },[lista])
 
+    const handleDelete = useCallback((id: string) =>{
+        TarefasService.deleteById(id).then((result)=>{
+            if (result instanceof ErrorException) {
+                alert(result.message);
+            } else {
+                setLista(oldLista => {
+                    return oldLista.filter(oldListItem => oldListItem.id!==id);
+                })
+            }
+        })
+    },[])
     return (
         <div>
             <p>Lista</p>
@@ -69,19 +80,10 @@ export const Lista = () =>{
                     checked={ListItem.isCompleted}
                     onChange={()=>{
                         handleOnChange(ListItem.id);
-                    }} 
-                    /*onChange={()=>{
-                        setLista(oldLista => {
-                            return oldLista.map(oldListItem =>{
-                                const newIsSelected = oldListItem.title === ListItem.title? !oldListItem.isCompleted:oldListItem.isCompleted
-                                return {
-                                    TarefasService.updateById(oldListItem.id,[...oldListItem, newIsSelected]),
-                                };
-                            });
-                        })
-                    }}*/>
+                    }}>
                     </input>
                     {ListItem.title}
+                    <button onClick={()=> handleDelete(ListItem.id)}>Deletar</button>
                     </li>})}
             </ul>
         </div>
