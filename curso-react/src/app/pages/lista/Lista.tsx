@@ -24,13 +24,17 @@ export const Lista = () =>{
             if(e.currentTarget.value.trim().length === 0) return;
             const value = e.currentTarget.value.trim();
             e.currentTarget.value = '';
-            setLista((oldLista)=>{
-                return [...oldLista,{
-                    id: oldLista.length,
-                    title: value,
-                    isCompleted:false
-                }];
+            TarefasService.create({
+                title: value,
+                isCompleted:false
+            }).then((result)=>{
+                if (result instanceof ErrorException) {
+                    alert(result.message);
+                } else {
+                    setLista((oldLista)=> {return [...oldLista,result]});
+                }
             })
+            
         }
     },[])
 
@@ -48,7 +52,7 @@ export const Lista = () =>{
                                 const newIsSelected = oldListItem.title === ListItem.title? !oldListItem.isCompleted:oldListItem.isCompleted
                                 return {
                                     ...oldListItem,
-                                    isSelected: newIsSelected
+                                    isCompleted: newIsSelected
                                 };
                             });
                         })

@@ -2,7 +2,7 @@ import { Api } from "../ApiConfig";
 import { ErrorException } from "../ErrorException";
 
 export interface ITarefa{
-    id:number;
+    id:string;
     title:string;
     isCompleted:boolean;
 }
@@ -23,7 +23,7 @@ const getById = async (id:number): Promise<ITarefa | ErrorException> => {
         return new ErrorException(error.message || 'Erro ao consultar dados')
     }
 };
-const create = async (dataToCreate: Omit<ITarefa, 'id'>): Promise<ITarefa[] | ErrorException> => {
+const create = async (dataToCreate: Omit<ITarefa, 'id'>): Promise<ITarefa | ErrorException> => {
     try {
         const { data } = await Api().post('/tarefas', dataToCreate);
         return data;
