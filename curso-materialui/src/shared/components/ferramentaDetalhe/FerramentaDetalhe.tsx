@@ -1,47 +1,62 @@
 import { Box, Button, Divider, Icon, Paper, useTheme } from "@mui/material";
 
 interface IFerramentaDetalheProps{
-    textoBusca?: string,
-    mostrarInputBusca?:boolean,
-    mudarTextoBusca?: (novoTexto: string) => void,
-    textoBotao?: string,
-    mostrarBotao?: boolean,
-    clicarBotao?: () => void
+    textoNovo?: string,
+    mostrarNovo?: boolean,
+    mostrarVoltar?: boolean,
+    mostrarApagar?: boolean,
+    mostrarSalvar?: boolean,
+    mostrarSalvarVoltar?: boolean,
+    eventoNovo?: ()=>void,
+    eventoVoltar?: ()=>void,
+    eventoApagar?: ()=>void,
+    eventoSalvar?: ()=>void,
+    eventoSalvarVoltar?: ()=>void,
+
 }
 
 export const FerramentaDetalhe: React.FC<IFerramentaDetalheProps> = ({
-    textoBusca = '', mostrarInputBusca = false, mudarTextoBusca,
-    textoBotao = 'Novo', mostrarBotao = true, clicarBotao
+    textoNovo = 'Novo',
+    eventoApagar,
+    eventoNovo,
+    eventoSalvar,
+    eventoSalvarVoltar,
+    eventoVoltar,
+    mostrarApagar= true,
+    mostrarNovo= true,
+    mostrarSalvar= true, 
+    mostrarSalvarVoltar= false,
+    mostrarVoltar= true
     }) =>{
     const theme = useTheme();
     return(
         <Box gap={1} marginX={1} padding={1} paddingX={1} display="flex" alignItems="center" height={theme.spacing(5)} component={Paper}>
-                <Box display="flex" justifyContent="end">
-                    <Button variant="contained" color="primary" disableElevation startIcon={<Icon>save</Icon>}>
+                {mostrarSalvar &&(<Box display="flex" justifyContent="end">
+                    <Button onClick={eventoSalvar} variant="contained" color="primary" disableElevation startIcon={<Icon>save</Icon>}>
                         Salvar
                     </Button>
-                </Box>
-                <Box display="flex" justifyContent="end">
-                    <Button variant="outlined" color="primary" disableElevation startIcon={<Icon>save</Icon>}>
+                </Box>)}
+                {mostrarSalvarVoltar && (<Box display="flex" justifyContent="end">
+                    <Button onClick={eventoSalvarVoltar} variant="outlined" color="primary" disableElevation startIcon={<Icon>save</Icon>}>
                         Salvar e Voltar
                     </Button>
-                </Box>
-                <Box display="flex" justifyContent="end">
-                    <Button variant="outlined" color="primary" disableElevation startIcon={<Icon>delete</Icon>}>
+                </Box>)}
+                {mostrarApagar && (<Box display="flex" justifyContent="end">
+                    <Button onClick={eventoApagar} variant="outlined" color="primary" disableElevation startIcon={<Icon>delete</Icon>}>
                         Apagar
                     </Button>
-                </Box>
-                <Box display="flex" justifyContent="end">
-                    <Button variant="outlined" color="primary" disableElevation startIcon={<Icon>add</Icon>}>
-                        Novo
+                </Box>)}
+                {mostrarNovo && (<Box display="flex" justifyContent="end">
+                    <Button onClick={eventoNovo} variant="outlined" color="primary" disableElevation startIcon={<Icon>add</Icon>}>
+                        {textoNovo}
                     </Button>
-                </Box>
+                </Box>)}
                 <Divider variant="middle" orientation="vertical"></Divider>
-                <Box display="flex" justifyContent="end">
-                    <Button variant="outlined" color="primary" disableElevation startIcon={<Icon>arrow_back</Icon>}>
+                {mostrarVoltar && (<Box display="flex" justifyContent="end">
+                    <Button onClick={eventoVoltar} variant="outlined" color="primary" disableElevation startIcon={<Icon>arrow_back</Icon>}>
                         Voltar
                     </Button>
-                </Box>
+                </Box>)}
         </Box>
     );
 }
