@@ -9,7 +9,7 @@ interface IBarraFerramentasProps{
     clicarBotao?: () => void
 }
 
-export const BarraFerramentas: React.FC<IBarraFerramentasProps> = ({
+export const FerramentaListagem: React.FC<IBarraFerramentasProps> = ({
     textoBusca = '', mostrarInputBusca = false, mudarTextoBusca,
     textoBotao = 'Novo', mostrarBotao = true, clicarBotao
     }) =>{
