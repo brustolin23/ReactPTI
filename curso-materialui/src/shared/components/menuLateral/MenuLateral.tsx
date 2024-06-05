@@ -5,13 +5,13 @@ import { useMatch, useResolvedPath } from "react-router-dom";
 interface IListItemLink{
     label: string,
     icon: string,
-    route: string,
+    path: string,
     onClick: (() => void) | undefined
 }
 
-const ListItemLink: React.FC<IListItemLink> = ({label, icon, route, onClick}) =>{
+const ListItemLink: React.FC<IListItemLink> = ({label, icon, path, onClick}) =>{
 
-    const resolvedPath = useResolvedPath(route);
+    const resolvedPath = useResolvedPath(path);
     const match = useMatch({path: resolvedPath.pathname, end: false});
 
     return(
@@ -41,10 +41,10 @@ export const MenuLateral: React.FC<{children: React.ReactNode}> = ({children}) =
                     <Box flex={1}>
                     {drawerOptions.map(drawerOption=>(
                         <ListItemLink 
-                        key={drawerOption.route}
+                        key={drawerOption.path}
                         onClick={smDown ? toggleDrawerOpen : undefined} 
                         icon={drawerOption.icon} 
-                        route={drawerOption.route} 
+                        path={drawerOption.path} 
                         label={drawerOption.label}
                         />
                     ))}
